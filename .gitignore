@@ -1,0 +1,21 @@
+*
+!.gitattributes
+!.gitignore
+!readme.md
+!.gitkeep
+!LICENSE
+
+#HDL Code Related
+!*.bdf
+!*.vhd
+!*.v
+!*.ptf
+!*.bsf
+!**/class.ptf
+!*.tbd
+!*.sof
+!*.tcl
+#####
+
+#
+!*/
