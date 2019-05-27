@@ -7,7 +7,7 @@ See the file LICENSE for copying permission.
 */
 
 `timescale 1ns / 100 ps
-module tb_ADDER;
+module tb_adder;
 	wire [7:0]S;
 	wire Cout, PG, GG;
 	reg [7:0]A, B;

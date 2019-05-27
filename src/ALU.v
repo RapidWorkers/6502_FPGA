@@ -7,33 +7,21 @@ See the file LICENSE for copying permission.
 */
 
 module ALU(
-    input clk,
-    input rst,
-    input [7:0]A, 
-    input [7:0]B, 
-    input SUMS,
-    input ANDS, 
-    input ORS, 
-    input XORS, 
-    input SRS, 
-    input BCDS,
-    input Cin, 
-    output RESULT,
-    output OF,
-    output Cout,
-    output HCout);
+    input [7:0]A,//Input A
+    input [7:0]B,//Input B
+    input SUMS,//SUM Flag
+    input ANDS,//AND Flag
+    input ORS,//OR Flag
+    input EORS,//Exclusive OR Flag
+    input SRS,//Shift Right Flag
+    input BCDS,//BCD Mode Flag
+    input Cin,//Carry in
+    output RESULT,//Result
+    output OF,//Overflow
+    output Cout,//Carry out
+    output HCout//Half Carry out
+);
 
-    //register output wire
-    wire AI, BI;
-
-    //combinational logic result
-    wire CL_RESULT;
-
-    //input register
-    REGISTER_8bit REGIN_0(clk, rst, A, AI);
-    REGISTER_8bit REGIN_1(clk, rst, B, BI);
-
-    //output register
-    REGISTER_8bit REGOUT_0(clk, rst, CL_RESULT, OUTPUT);
+//use mux to select output
 
 endmodule
