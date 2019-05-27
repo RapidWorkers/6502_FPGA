@@ -16,12 +16,30 @@ module ALU(
     input SRS,//Shift Right Flag
     input BCDS,//BCD Mode Flag
     input Cin,//Carry in
-    output RESULT,//Result
-    output OF,//Overflow
-    output Cout,//Carry out
-    output HCout//Half Carry out
+    output reg [7:0]RESULT,//Result
+    output reg OF,//Overflow
+    output reg Cout,//Carry out
+    output reg HCout//Half Carry out
 );
 
-//use mux to select output
+wire [4:0]Control = {SUMS, ANDS, ORS, EORS, SRS};
+wire [7:0]BIN_SUM, BCD_SUM;
+wire SUM_Cout;
 
+CLA_8bit CLA1(BIN_SUM, SUM_Cout, , , A, B, Cin);
+
+//use mux to select output
+always @(Control) begin
+    case (Control)
+        5'b00001: begin
+            Cout <= A[0];
+            RESULT <= A >> 1;
+        end
+        5'b00010: RESULT = A ^ B;
+        5'b00100: RESULT = A | B;
+        5'b01000: RESULT = A & B;
+        5'b10000: RESULT = BIN_SUM;
+        default: RESULT = 5'b00000; 
+    endcase
+end
 endmodule
