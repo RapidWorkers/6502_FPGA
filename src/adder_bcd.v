@@ -13,19 +13,13 @@ See the file LICENSE for copying permission.
 //Currently, This is Ripple Carry BCD adder!!
 
 module CLA_BCD_2Dig(
-    A1,//1st Digit of A
-    B1,//1st Digit of B
-    A2,//2nd Digit of A
-    B2,//2nd Digit of B
-    Cin,//Carry In
-    S,//BCD Sum
-    Cout//BCD Carry out
+    output [7:0] S,//BCD Sum
+    output Cout,//BCD Carry out
+    output HCout,//Half Carry Out
+    input [7:0] A,//Input A
+    input [7:0] B,//Input B
+    input Cin//Carry In
 );
-    input [3:0]A1, B1, A2, B2;
-    input Cin;
-
-    output [7:0]S;
-    output [1:0]Cout;
 
     wire [3:0]W0, W1;
     wire [1:0]P, G, C;
@@ -45,6 +39,8 @@ module CLA_BCD_2Dig(
     assign B_1[2] = tmp1;
     assign B_1[1] = tmp1;
     assign B_1[0] = 0;
+
+    assign HCout = tmp0 | tmp1;
 
     //blank out Carry Out Port, don't use that since all carry will be calculated by lookahead logic
 
