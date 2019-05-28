@@ -19,27 +19,35 @@ module ALU(
     output reg [7:0]RESULT,//Result
     output reg OF,//Overflow
     output reg Cout,//Carry out
-    output reg HCout//Half Carry out
+    output reg HCout//Half Carry out(Decimal Adjustmented)
 );
 
-wire [4:0]Control = {SUMS, ANDS, ORS, EORS, SRS};
+wire [5:0]Control = {BCDS, SUMS, ANDS, ORS, EORS, SRS};
 wire [7:0]BIN_SUM, BCD_SUM;
-wire SUM_Cout;
+wire BIN_SUM_Cout, BCD_SUM_Cout;
 
 CLA_8bit CLA1(BIN_SUM, SUM_Cout, , , A, B, Cin);
+CLA_BCD_2Dig BCD_CLA1(BCD_SUM, BCD_SUM_Cout, A, B, Cin);
 
 //use mux to select output
-always @(Control) begin
+//may changed since not completed
+always @(*) begin
     case (Control)
-        5'b00001: begin
-            Cout <= A[0];
-            RESULT <= A >> 1;
+        6'b000001: begin//Shift Right
+            Cout = A[0];
+            RESULT = A >> 1;
         end
-        5'b00010: RESULT = A ^ B;
-        5'b00100: RESULT = A | B;
-        5'b01000: RESULT = A & B;
-        5'b10000: RESULT = BIN_SUM;
-        default: RESULT = 5'b00000; 
+        6'b000010: RESULT = A ^ B;
+        6'b000100: RESULT = A | B;
+        6'b001000: RESULT = A & B;
+        6'b010000: begin//Binary Sum
+            RESULT = BIN_SUM;
+            Cout = BCD_SUM_Cout;
+        end
+        6'b110000: begin //BCD Sum
+            RESULT = BCD_SUM;
+        end
+        default: RESULT = 8'b00000000; //Unknown ALU Control Bit
     endcase
 end
 endmodule
