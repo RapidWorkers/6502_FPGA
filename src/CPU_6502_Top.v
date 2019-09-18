@@ -20,4 +20,10 @@ module CPU_6502_Top(
     output [15:0]ADDR_BUS,//16bit Address Bus
     inout [7:0]DATA_BUS//8bit Data Bus
 );
+	
+	//assign clock output
+	assign CLKOUT_2 = clk;
+	assign CLKOUT_1 = ~clk;
+	
+	
 endmodule
