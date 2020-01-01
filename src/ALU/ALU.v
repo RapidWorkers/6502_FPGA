@@ -40,9 +40,9 @@ module ALU(
 	wire RESULT_OR;
 	assign RESULT_OR = A | B;
 	
-	//XOR
-	wire RESULT_XOR;
-	assign RESULT_XOR = A ^ B;
+	//EOR
+	wire RESULT_EOR;
+	assign RESULT_EOR = A ^ B;
 	
 	//Shift Right
 	wire RESULT_SR;
@@ -71,7 +71,7 @@ always @(Control) begin
         6'b000010:
 				RESULT <= RESULT_OR;
         6'b000100:
-				RESULT <= RESULT_XOR;
+				RESULT <= RESULT_EOR;
         6'b001000:
 				RESULT <= RESULT_SR;
         6'b010000:

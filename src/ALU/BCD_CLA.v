@@ -6,6 +6,7 @@ Copyright (c) <2019> S.H Kim (soohyunkim@kw.ac.kr)
 See the file LICENSE for copying permission.
 */
 
+/*
 module BCD_CLA(
     input [7:0] A,//Input A
     input [7:0] B,//Input B
@@ -16,3 +17,4 @@ module BCD_CLA(
 );
 
 endmodule
+*/
